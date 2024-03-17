@@ -1,6 +1,6 @@
 // candidatesRoutes.js
 import express from 'express';
-import { getTotalCandidates, getCandidatesByStatus } from '../controllers/candidatesController.js';
+import { getTotalCandidates, getCandidatesByStatus, getCandidatesByGender } from '../controllers/candidatesController.js';
 
 const router = express.Router();
 
@@ -19,6 +19,16 @@ router.get('/:status', async (req, res) => {
     try {
         const candidates = await getCandidatesByStatus(status);
         res.json(candidates);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+router.get('/gender/compare', async (req, res) => {
+    try {
+        const candidatesByGender = await getCandidatesByGender();
+        res.json(candidatesByGender);
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Internal server error' });
