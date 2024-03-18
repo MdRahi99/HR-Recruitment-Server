@@ -14,6 +14,16 @@ router.get('/', async (req, res) => {
     }
 });
 
+router.get('/all', async (req, res) => {
+    try {
+        const candidates = await getTotalCandidates();
+        res.json(candidates);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
 router.get('/:status', async (req, res) => {
     const { status } = req.params;
     try {
