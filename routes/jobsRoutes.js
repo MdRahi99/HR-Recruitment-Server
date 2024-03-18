@@ -27,7 +27,7 @@ router.get('/:jobId', async (req, res) => {
 
 router.post('/create-job', async (req, res) => {
     try {
-        const { title, description, location, salary } = req.body;
+        const { title, description, location, salary, applicants } = req.body;
 
         if (!title || !description || !location || !salary) {
             return res.status(400).json({ error: 'Missing required fields' });
