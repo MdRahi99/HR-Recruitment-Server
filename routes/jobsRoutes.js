@@ -29,11 +29,11 @@ router.post('/create-job', async (req, res) => {
     try {
         const { title, description, location, salary, applicants } = req.body;
 
-        if (!title || !description || !location || !salary) {
+        if (!title || !description || !location || !salary || !applicants) {
             return res.status(400).json({ error: 'Missing required fields' });
         }
 
-        const newJob = await createNewJob({ title, description, location, salary });
+        const newJob = await createNewJob({ title, description, location, salary, applicants });
 
         res.status(201).json(newJob);
     } catch (error) {
